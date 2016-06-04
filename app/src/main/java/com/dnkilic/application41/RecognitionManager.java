@@ -19,10 +19,12 @@ public class RecognitionManager implements RecognitionListener {
     private SpeechRecognizer speechRecognizer;
     private TextView tvRecognitionResult;
     private TextView tvSpeechEvents;
+    private RecognitionResultListener mListener;
 
     public RecognitionManager(Activity act)
     {
         mAct = act;
+        mListener = (RecognitionResultListener) act;
 
         tvRecognitionResult = (TextView) act.findViewById(R.id.tvRecognitionResult);
         tvSpeechEvents = (TextView) act.findViewById(R.id.tvSpeechEvents);
@@ -108,8 +110,8 @@ public class RecognitionManager implements RecognitionListener {
         ArrayList<String> text = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
         float [] confidence = results.getFloatArray(SpeechRecognizer.CONFIDENCE_SCORES);
 
+        mListener.onResult(text.get(0));
         Toast.makeText(mAct, text.toString(), Toast.LENGTH_LONG).show();
-
     }
 
     @Override

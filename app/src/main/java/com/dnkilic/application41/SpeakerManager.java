@@ -4,14 +4,17 @@ import android.app.Activity;
 import android.speech.tts.TextToSpeech;
 import android.widget.Toast;
 
+import com.dnkilic.application41.view.Dialog;
+import com.dnkilic.application41.view.DialogType;
+
 import java.util.Locale;
 
 public class SpeakerManager {
 
     private TextToSpeech textToSpeech;
-    private Activity mAct;
+    private MainActivity mAct;
 
-    public SpeakerManager(Activity act)
+    public SpeakerManager(MainActivity act)
     {
         mAct = act;
 
@@ -21,7 +24,7 @@ public class SpeakerManager {
                 if(status == TextToSpeech.SUCCESS)
                 {
                     textToSpeech.setLanguage(new Locale("TR-tr"));
-                    textToSpeech.speak("Merhaba ben Sementha sana nasıl yardımcı olabilirim?", TextToSpeech.QUEUE_FLUSH, null);
+                    speak("Merhaba ben Sementha sana nasıl yardımcı olabilirim?");
                     Toast.makeText(mAct, "TTS Başarılı", Toast.LENGTH_LONG).show();
                 }
                 else
@@ -33,6 +36,7 @@ public class SpeakerManager {
     }
 
     public void speak(String announce) {
+        mAct.addItem(new Dialog(announce, DialogType.TYPE_DIALOG_RECEIVED));
         textToSpeech.speak(announce, TextToSpeech.QUEUE_FLUSH, null);
     }
 }

@@ -9,6 +9,7 @@ import android.speech.SpeechRecognizer;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dnkilic.application41.baris.DatabaseManager;
 import com.dnkilic.application41.view.Dialog;
 import com.dnkilic.application41.view.DialogType;
 
@@ -17,6 +18,7 @@ import java.util.Locale;
 
 
 public class RecognitionManager implements RecognitionListener {
+    private DatabaseManager mDBManager;
 
     private MainActivity mAct;
     private SpeechRecognizer speechRecognizer;
@@ -26,6 +28,7 @@ public class RecognitionManager implements RecognitionListener {
 
     public RecognitionManager(MainActivity act)
     {
+        mDBManager = new DatabaseManager(act);
         mAct = act;
         mListener = (RecognitionResultListener) act;
 
@@ -114,6 +117,8 @@ public class RecognitionManager implements RecognitionListener {
         float [] confidence = results.getFloatArray(SpeechRecognizer.CONFIDENCE_SCORES);
 
         mListener.onResult(text.get(0));
+        mDBManager.insertResult(text.get(0));
+        mDBManager.listResults();
         Toast.makeText(mAct, text.toString(), Toast.LENGTH_LONG).show();
     }
 

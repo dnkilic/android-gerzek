@@ -35,8 +35,14 @@ public class SpeakerManager {
         });
     }
 
-    public void speak(String announce) {
-        mAct.addItem(new Dialog(announce, DialogType.TYPE_DIALOG_RECEIVED));
-        textToSpeech.speak(announce, TextToSpeech.QUEUE_FLUSH, null);
+    public void speak(final String announce) {
+
+        mAct.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mAct.addItem(new Dialog(announce, DialogType.TYPE_DIALOG_RECEIVED));
+                textToSpeech.speak(announce, TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
     }
 }

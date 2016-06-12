@@ -4,27 +4,36 @@ import android.app.Activity;
 import android.content.Intent;
 import android.provider.AlarmClock;
 
+import com.dnkilic.application41.huseyin.WikiSearchManager;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
  * Created by dnkilic on 04/06/16.
  */
-public class CommandAnalyzer {
+public class CommandAnalyzer implements WikipediaReader {
 
     /*
-    * Hüseyin wikipedia'dan
-    * Hüseyin makale okutsun Resmigazeteden birşey okutsun resmi gazete oku
+    * Hüseyin
+    * Barış
+    * Cihan
+    * Şenel
+    * */
+
+    //herkese 3 görev verielcek 2si yapılacak 1i yapılmazsa sıkıntı yok
+
+    /*
+    * Hüseyin wikipedidan alınmış içeriğin güzelleştirilmesi
+    * Hüseyin makale okutsun MANŞET birşey okutsun resmi gazete oku
+    * Hüseyin nedir ne demek yapacak
     * Aslıhan SMS gönderme
     * Aslıhan kameranın çektiği fotoğrafı kaydetme sorunu çözülmeli
     * Suzan Naber/Naasılsın/Hal hatır sormaya cevaplar
-    * Suzan Background'a üç tane resim bulunacak oylama ile seçeceğiz 100x100
     * Ahmet Y. 1.telefondaki mp3leri bulacak + herhangibirisini çalacak
     * Cihan backgroundaddan arama yapacaksın 1. rehber kayıtları bir map'e koyulur 2. kullanıcının söylediği isim tanınır 3. arama yapılır
-    * Mesut openweatherapi hava durumu nasıl
-    * Barış kullanıcılar tarafından yapılan sorguları veritabanına kaydetme
+    * Mesut glosbe api elma ne demek ingilizce karşılığı
     * Barış dolar ne kadar euro ne kadar
-    * Barış türkçedeki isimler listesi bulunmalı, veritabanı şeklinde androidde kullanılacak hale geitirilmeli, sorgu yapıldığı durumda kaç saniye sürüyor analiz edilsin
     * Şenel ankaradan izmire nasıl gidilir 81
     * Onur neredeyim sorusuna cevap versin
     * Ahmet Ç. glosbe api'sini kullanarak translate işlemi yapılmalı, x çevir, glosbe
@@ -36,6 +45,9 @@ public class CommandAnalyzer {
     * Ece güzel üç  buton ve küçük buton resmi bulunacak 9patch
     * Ece diyaloglar için güzel bir renk tercihi yapılmalı (3)
     * Engin application bar'ın rengi simgesi, uygulama simgesi ayarlanmalı
+    * Hilal Büşra Bodur artı/eksi/çarpı/bölü/kere/mod/yüzde işlemleri yapıalcak
+    * Bahar&Emre openweathermap api yi kullanaak hava durumu entegrasyonu
+    * Doğan command Analyzer zeki bir hale getirilsin
     * */
 
     //TODO işlem 1 : buraya menünün int değeri eklenir
@@ -46,12 +58,15 @@ public class CommandAnalyzer {
     public final static int CLOSE_APPLICATION = 3;
     public final static int SET_ALARM = 4;
     public final static int OPEN_CAMERA = 5;
+    public final static int READ_WIKIPEDIA = 6;
 
     private Activity mAct;
+    private SpeakerManager mSpeakerManager;
 
-    public CommandAnalyzer(Activity activty)
+    public CommandAnalyzer(Activity activty, SpeakerManager speakerManager)
     {
         mAct = activty;
+        mSpeakerManager = speakerManager;
     }
 
     public Command analyze(String result) {
@@ -127,6 +142,19 @@ public class CommandAnalyzer {
         {
                 command = new Command("Kamerayı açıyorum", CommandAnalyzer.OPEN_CAMERA);
         }
+        else if(result.contains("wikipedi") || result.contains("wiki") ||
+                result.contains("wikipedia") || result.contains("vikipedi"))
+        {
+            String query = result;
+            result = result.replace("wikipedi", "");
+            result = result.replace("wiki", "");
+            result = result.replace("wikipedia", "");
+            result = result.replace("vikipedi", "");
+
+            WikiSearchManager ws = new WikiSearchManager(this);
+            ws.getWikiResults(result);
+
+        }
 
         /* else if(result.contains(""))
         {
@@ -146,5 +174,10 @@ public class CommandAnalyzer {
         i.putExtra(AlarmClock.EXTRA_MINUTES, Integer.parseInt(minute));
         i.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
         mAct.startActivity(i);
+    }
+
+    @Override
+    public void onWikipediaResult(String content) {
+        mSpeakerManager.speak(content);
     }
 }

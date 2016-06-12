@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.dnkilic.application41.huseyin.WikiSearchManager;
 import com.dnkilic.application41.view.Dialog;
 import com.dnkilic.application41.view.DialogAdapter;
 import com.dnkilic.application41.view.DialogType;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements RecognitionResult
     public void addItem(Dialog dialog)
     {
         mItems.add(dialog);
+        mRecyclerView.scrollToPosition(mAdapter.getItemCount()-1);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -64,50 +66,53 @@ public class MainActivity extends AppCompatActivity implements RecognitionResult
 
         addItem(new Dialog(result, DialogType.TYPE_DIALOG_SENT));
 
-        CommandAnalyzer analyzer = new CommandAnalyzer(this);
+        CommandAnalyzer analyzer = new CommandAnalyzer(this, speakerManager);
 
         Command command = analyzer.analyze(result.toLowerCase());
 
-        //TODO işlem 3: bu bölümde anonsların okunması ve comutların execute edilmesi işlemleri yapılır
-        switch (command.getCommandType())
+        if(command != null)
         {
-            case CommandAnalyzer.CLOSE_BLUETOOTH:
-                if(setBluetooth(false))
-                {
+            //TODO işlem 3: bu bölümde anonsların okunması ve comutların execute edilmesi işlemleri yapılır
+            switch (command.getCommandType())
+            {
+                case CommandAnalyzer.CLOSE_BLUETOOTH:
+                    if(setBluetooth(false))
+                    {
+                        speakerManager.speak(command.getAnnounce());
+                    }
+                    else
+                    {
+                        speakerManager.speak("Bilmediğim bir sebepten dolayı bluetooth'u kapatamadım.");
+                    }
+                    break;
+                case CommandAnalyzer.OPEN_BLUETOOTH:
+                    if(setBluetooth(true))
+                    {
+                        speakerManager.speak(command.getAnnounce());
+                    }
+                    else
+                    {
+                        speakerManager.speak("Bilmediğim bir sebepten dolayı bluetooth'u açamadım.");
+                    }
+                    break;
+                case CommandAnalyzer.EXECUTE_UNKNOWN_COMMAND:
                     speakerManager.speak(command.getAnnounce());
-                }
-                else
-                {
-                    speakerManager.speak("Bilmediğim bir sebepten dolayı bluetooth'u kapatamadım.");
-                }
-                break;
-            case CommandAnalyzer.OPEN_BLUETOOTH:
-                if(setBluetooth(true))
-                {
+                    break;
+                case CommandAnalyzer.MAKE_FUNNY_ANSWER:
                     speakerManager.speak(command.getAnnounce());
-                }
-                else
-                {
-                    speakerManager.speak("Bilmediğim bir sebepten dolayı bluetooth'u açamadım.");
-                }
-                break;
-            case CommandAnalyzer.EXECUTE_UNKNOWN_COMMAND:
-                speakerManager.speak(command.getAnnounce());
-                break;
-            case CommandAnalyzer.MAKE_FUNNY_ANSWER:
-                speakerManager.speak(command.getAnnounce());
-                break;
-            case CommandAnalyzer.CLOSE_APPLICATION:
-                speakerManager.speak(command.getAnnounce());
-                finish();
-                break;
-            case CommandAnalyzer.SET_ALARM:
-                speakerManager.speak(command.getAnnounce());
-                break;
-            case CommandAnalyzer.OPEN_CAMERA:
-                speakerManager.speak(command.getAnnounce());
-                openCamera();
-                break;
+                    break;
+                case CommandAnalyzer.CLOSE_APPLICATION:
+                    speakerManager.speak(command.getAnnounce());
+                    finish();
+                    break;
+                case CommandAnalyzer.SET_ALARM:
+                    speakerManager.speak(command.getAnnounce());
+                    break;
+                case CommandAnalyzer.OPEN_CAMERA:
+                    speakerManager.speak(command.getAnnounce());
+                    openCamera();
+                    break;
+            }
         }
     }
 

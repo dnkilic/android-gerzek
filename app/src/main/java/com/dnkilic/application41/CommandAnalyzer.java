@@ -59,6 +59,7 @@ public class CommandAnalyzer implements WikipediaReader {
     public final static int SET_ALARM = 4;
     public final static int OPEN_CAMERA = 5;
     public final static int READ_WIKIPEDIA = 6;
+    public final static  int OPEN_EXTERNAL_APP = 7;
 
     private Activity mAct;
     private SpeakerManager mSpeakerManager;
@@ -142,6 +143,47 @@ public class CommandAnalyzer implements WikipediaReader {
         {
                 command = new Command("Kamerayı açıyorum", CommandAnalyzer.OPEN_CAMERA);
         }
+
+
+        else if(result.contains("vatsabı aç") || result.contains("vatsap aç") || result.contains("whatsapp") ||
+                result.contains("whatssapp"))
+        {
+            command = new Command("vatsabı açıyorum", CommandAnalyzer.OPEN_EXTERNAL_APP);
+        }
+
+        else if(result.contains("feysi aç") || result.contains("feysbuğu aç") || result.contains("feysi aç") ||
+                result.contains("face'i aç") || result.contains("feysbık aç") || result.contains("facebook aç")
+                || result.contains("facebook'u aç"))
+        {
+            command = new Command("feysbuğu açıyorum", CommandAnalyzer.OPEN_EXTERNAL_APP);
+        }
+
+        else if(result.contains("viberi aç") || result.contains("viber aç") || result.contains("vaybır aç") ||
+                result.contains("viber") || result.contains("viber'i aç"))
+        {
+            command = new Command("viberi açıyorum", CommandAnalyzer.OPEN_EXTERNAL_APP);
+        }
+
+        else if(result.contains("krom aç") || result.contains("kroom aç") || result.contains("chrome aç"))
+        {
+            command = new Command("krom açıyorum", CommandAnalyzer.OPEN_EXTERNAL_APP);
+        }
+
+        else if(result.contains("sworm aç") || result.contains("swam aç") || result.contains("swormu aç")
+                || result.contains("sıvan aç"))
+        {
+            command = new Command("swormu açıyorum", CommandAnalyzer.OPEN_EXTERNAL_APP);
+        }
+
+        else if(result.contains("twiter aç") || result.contains("twitter aç") || result.contains("tivitır aç")
+                || result.contains("tıvıtır aç"))
+        {
+            command = new Command("tıvıtır'ı açıyorum", CommandAnalyzer.OPEN_EXTERNAL_APP);
+        }
+
+
+
+
         else if(result.contains("wikipedi") || result.contains("wiki") ||
                 result.contains("wikipedia") || result.contains("vikipedi"))
         {

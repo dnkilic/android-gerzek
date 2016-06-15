@@ -112,8 +112,61 @@ public class MainActivity extends AppCompatActivity implements RecognitionResult
                     speakerManager.speak(command.getAnnounce());
                     openCamera();
                     break;
+
+                case CommandAnalyzer.OPEN_EXTERNAL_APP:
+                    speakerManager.speak(command.getAnnounce());
+                    openApp(command.getAnnounce());
+                    break;
+
             }
         }
+    }
+
+    private void openApp(String gelen){
+
+        Intent waIntent = new Intent();
+
+
+        if (gelen.indexOf("vatsab")>=0)
+        {
+            waIntent.setPackage("com.whatsapp");
+            startActivity(waIntent);
+       } else if (gelen.indexOf("feys")>=0)
+        {
+            Intent intent = new Intent("android.intent.category.LAUNCHER");
+            intent.setClassName("com.facebook.katana", "com.facebook.katana.LoginActivity");
+            startActivity(intent);
+        }
+
+        else if (gelen.indexOf("viber")>=0)
+        {
+            waIntent.setPackage("com.viber.voip");
+            startActivity(waIntent);
+        }
+
+        else if (gelen.indexOf("krom")>=0)
+        {
+            waIntent.setPackage("com.android.chrome");
+            startActivity(waIntent);
+        }
+
+        else if (gelen.indexOf("swormu")>=0)
+        {
+            waIntent.setPackage("com.foursquare.robin");
+            startActivity(waIntent);
+        }
+        else if (gelen.indexOf("tıvıtır'ı")>=0)
+        {
+            waIntent.setPackage("com.twitter.android");
+            startActivity(waIntent);
+        }
+
+
+
+
+
+
+
     }
 
     private void openCamera() {

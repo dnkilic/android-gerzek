@@ -11,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.dnkilic.application41.huseyin.WikiSearchManager;
 import com.dnkilic.application41.view.Dialog;
 import com.dnkilic.application41.view.DialogAdapter;
 import com.dnkilic.application41.view.DialogType;
@@ -160,13 +159,6 @@ public class MainActivity extends AppCompatActivity implements RecognitionResult
             waIntent.setPackage("com.twitter.android");
             startActivity(waIntent);
         }
-
-
-
-
-
-
-
     }
 
     private void openCamera() {

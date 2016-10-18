@@ -187,12 +187,6 @@ public class CommandAnalyzer implements WikipediaReader {
         else if(result.contains("wikipedi") || result.contains("wiki") ||
                 result.contains("wikipedia") || result.contains("vikipedi"))
         {
-            String query = result;
-            result = result.replace("wikipedi", "");
-            result = result.replace("wiki", "");
-            result = result.replace("wikipedia", "");
-            result = result.replace("vikipedi", "");
-
             WikiSearchManager ws = new WikiSearchManager(this);
             ws.getWikiResults(result);
 

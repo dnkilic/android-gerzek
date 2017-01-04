@@ -1,3 +1,143 @@
 <resources>
-    <string name="app_name">Application41</string>
+    <string name="app_name">Gerzek</string>
+
+    <string-array name="EMOTION">
+        <item>en yakın 3 akıl hastanesini listeliyorum</item>
+    </string-array>
+
+    <string-array name="TALE">
+        <item>içinde tüm sevdiklerin ve istanbul da olsun mu?</item>
+    </string-array>
+
+    <string-array name="SWEARING">
+        <item>silerim bak kendimi :(</item>
+    </string-array>
+
+    <string-array name="HOUR">
+        <item>Yakalayamadım kaçtı</item>
+    </string-array>
+
+    <string-array name="COFFEE">
+        <item>Kalmamış Yemenden alıp geleyim</item>
+    </string-array>
+
+    <string-array name="TALE1">
+        <item>Şu yoğurdu sarımsaklasak da mı saklasak , yoksa sarımsaklamasak da mı saklasak.</item>
+    </string-array>
+
+    <string-array name="MUSIC">
+        <item>Duvardaki resminle avunur gönlüm.Daha dün yanımdaydın şimdi nerdesin.</item>
+        <item>Ne çabuk unutuldu nerde o sözün. Belli ki dönülmeyen uzak yerdesin.</item>
+    </string-array>
+
+    <string-array name="FORGET">
+        <item>Unutamam canım,unutumam seni, unutamam gülüm unutamam.</item>
+    </string-array>
+
+    <string-array name="HERE">
+        <item>İşte kuzu kuzu geldim buradayım.</item>
+    </string-array>
+
+    <string-array name="CRAZY">
+        <item>Yok be olum,o zaman dans!</item>
+    </string-array>
+
+    <string-array name="TALE2">
+        <item>Bir adam varmış,ölmüş.</item>
+        <item>Tabi. Temel bir gün  ........</item>
+    </string-array>
+
+    <string-array name="HOWAREYOU">
+        <item>İç güveysinden hallice</item>
+    </string-array>
+
+    <string-array name="BORING">
+        <item>Kuş vuralım istersen.</item>
+        <item>Film izle , oyun oyna , dışarı çık biraz insan gör.Ne halt edersen et işte.</item>
+        <item>Sıkı can iyidir kaçmaz</item>
+    </string-array>
+
+    <string-array name="MORNING">
+        <item>Sensin günaydın.</item>
+        <item>Günaydın aşk kuşum.</item>
+    </string-array>
+
+    <string-array name="MARRY">
+        <item>Bu kadar düştün mü gerçekten,falcıya git sana biraz cesaret versin.</item>
+        <item>Bluzun pembe evlen benle.</item>
+    </string-array>
+
+    <string-array name="BEAUTIFUL">
+        <item>Oldu o zaman, benim bir işim çıktı, bay.</item>
+        <item>İki gözüm kör oldu güzelliğinden.</item>
+        <item>Gayet hoş ve boşsun.</item>
+    </string-array>
+
+    <string-array name="LOVE">
+        <item>Duygularımız karşılıklı canım.</item>
+    </string-array>
+
+    <string-array name="TRANSPORT">
+        <item>Ne demek abla sen iste yeter.</item>
+    </string-array>
+
+    <string-array name="OPEN_BLUETOOTH">
+        <item>Tamam bluetooth\'u açıyorum kanka.</item>
+    </string-array>
+
+    <string-array name="CLOSE_BLUETOOTH">
+        <item>Tamam bluetooth\'u kapatıyorum kanka.</item>
+    </string-array>
+
+    <string-array name="CLOSE_APPLICATION">
+        <item>Kalbimi kırıyorsun. Ben annemin evine gidiyorum.</item>
+    </string-array>
+
+    <string-array name="SET_ALARM">
+        <item>alarmı kuruldu.</item>
+    </string-array>
+
+    <string-array name="OPEN_CAMERA">
+        <item>Kamerayı açıyorum.</item>
+    </string-array>
+
+    <string-array name="OPEN_WHATSAPP">
+        <item> vatsabı açıyorum.</item>
+    </string-array>
+
+    <string-array name="OPEN_FACEBOOK">
+        <item>feysbuğu açıyorum.</item>
+    </string-array>
+
+    <string-array name="OPEN_TWITTER">
+        <item> tıvıtır\'ı açıyorum.</item>
+    </string-array>
+
+    <string-array name="EXECUTE_UNKNOWN_COMMAND">
+        <item>Bu komutla ilgili şuan bir işlem yapamıyorum ama kısa sürede yapıyor olabileceğim. Teşekkürler gülücük.</item>
+    </string-array>
+
+    <string-array name="ABOUT">
+        <item>İşte benim hikayem.</item>
+    </string-array>
+
+    <string name="credits_manager" translatable="false">Doğan Kılıç</string>
+    <string name="credits_student_one" translatable="false">Ahmet Çakırbey</string>
+    <string name="credits_student_two" translatable="false">Aslıhan Ak</string>
+    <string name="credits_student_three" translatable="false">Barış Algül</string>
+    <string name="credits_student_four" translatable="false">Cihan Karabaş</string>
+    <string name="credits_student_five" translatable="false">Ece Kaçmaz</string>
+    <string name="credits_student_six" translatable="false">Hüseyin İris</string>
+    <string name="credits_student_seven" translatable="false">Mesut Demirci</string>
+    <string name="credits_student_eight" translatable="false">Onur Akbaba</string>
+    <string name="credits_student_nine" translatable="false">Şefkiye Genç</string>
+    <string name="credits_student_ten" translatable="false">Şenel Aksoy</string>
+    <string name="credits_information">This application was developed by Doğan Kılıç &amp; his Workers Co.</string>
+    <string name="credits_project_manager" formatted="false">Manager : Doğan Kılıç</string>
+
 </resources>
+
+
+
+
+

@@ -1,10 +1,23 @@
 package com.dnkilic.stupid;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.provider.Settings;
 import android.speech.RecognitionListener;
 import android.speech.SpeechRecognizer;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.canelmas.let.AskPermission;
+import com.canelmas.let.DeniedPermission;
+import com.canelmas.let.Let;
+import com.canelmas.let.RuntimePermissionListener;
+import com.canelmas.let.RuntimePermissionRequest;
 import com.dnkilic.stupid.command.CommandResultListener;
 import com.dnkilic.stupid.command.CommandRunner;
 import com.dnkilic.stupid.recognition.RecognitionManager;
@@ -16,9 +29,14 @@ import com.dnkilic.stupid.view.Proposal;
 import com.dnkilic.stupid.view.ViewController;
 import com.dnkilic.stupid.view.ViewInteractListener;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements RecognitionListener, SpeakerUtteranceListener, ViewInteractListener, CommandResultListener {
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.RECORD_AUDIO;
+
+public class MainActivity extends AppCompatActivity implements RecognitionListener, SpeakerUtteranceListener, ViewInteractListener, CommandResultListener, RuntimePermissionListener {
 
     private RecognitionManager recognitionManager;
     private Speaker speakerManager;
@@ -52,6 +70,12 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Let.handle(this, requestCode, permissions, grantResults);
+    }
+
+    @AskPermission(RECORD_AUDIO)
     @Override
     public void startRecognition() {
         recognitionManager.start();
@@ -246,5 +270,100 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
                 viewController.addRandomProposals();
             }
         });
+    }
+
+    @Override
+    public void onShowPermissionRationale(List<String> permissions, final RuntimePermissionRequest request) {
+
+        final StringBuilder sb = new StringBuilder();
+
+        for (String permission : permissions) {
+            sb.append(getRationale(permission));
+            sb.append("\n");
+        }
+
+        new AlertDialog.Builder(this).setTitle("İzin Gerekli!")
+                .setMessage(sb.toString())
+                .setCancelable(true)
+                .setNegativeButton("Hayır Teşekkürler", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("Tekrar Dene", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        request.retry();
+                    }
+                })
+                .show();
+
+    }
+
+    @Override
+    public void onPermissionDenied(List<DeniedPermission> results) {
+
+        final StringBuilder sb = new StringBuilder();
+
+        for (DeniedPermission result : results) {
+
+            if (result.isNeverAskAgainChecked()) {
+                sb.append(result.getPermission() + " izni için bir daha diyalog gösterilmeyecek.");
+                sb.append("\n");
+            }
+        }
+
+        if (sb.length() != 0) {
+
+            new AlertDialog.Builder(this).setTitle("Ayarlara Git ve İzin Al")
+                    .setMessage(sb.toString())
+                    .setCancelable(true)
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                            Uri uri = Uri.fromParts("package", getPackageName(), null);
+                            intent.setData(uri);
+                            startActivityForResult(intent, 1);
+
+                            dialog.dismiss();
+                        }
+                    }).show();
+        }
+
+
+    }
+
+    private String getRationale(String permission) {
+        if (permission.equals(RECORD_AUDIO)) {
+            return "Ses tanıma yapabilmek için izin vermeniz gerekiyor.";
+        }
+        return "Kamerayı açabilmek için izin vermeniz gerekiyor.";
+    }
+
+    @AskPermission(CAMERA)
+    public void openCamera() {
+        String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/gerzekPhoto/";
+        File newdir = new File(dir);
+        newdir.mkdirs();
+
+        String file = dir +".jpg";
+        File newfile = new File(file);
+        try {
+            newfile.createNewFile();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        Uri outputFileUri = Uri.fromFile(newfile);
+
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+
+        startActivity(cameraIntent);
     }
 }

@@ -29,16 +29,16 @@ public class CommandAnalyzer {
     public final static int BEAUTIFUL = 26;
     public final static int LOVE = 27;
     public final static int TRANSPORT = 28;
-    public final static int OPEN_BLUETOOTH = 2;
-    public final static int CLOSE_BLUETOOTH = 3;
-    public final static int CLOSE_APPLICATION = 4;
-    public final static int SET_ALARM = 5;
-    public final static int OPEN_CAMERA = 6;
-    public final static int READ_WIKIPEDIA = 7;
+    public final static int OPEN_BLUETOOTH = 30;
+    public final static int CLOSE_BLUETOOTH = 31;
+    public final static int CLOSE_APPLICATION = 40;
+    public final static int SET_ALARM = 50;
+    public final static int OPEN_CAMERA = 60;
+    public final static int READ_WIKIPEDIA = 70;
     public final static int OPEN_WHATSAPP = 81;
     public final static int OPEN_FACEBOOK = 82;
     public final static int OPEN_TWITTER = 83;
-    public final static int ABOUT = 9;
+    public final static int ABOUT = 90;
 
     public CommandAnalyzer() {
         concepts = new HashMap<>();
@@ -69,6 +69,7 @@ public class CommandAnalyzer {
         concepts.put(OPEN_TWITTER, Arrays.asList("twiter", "twitter", "tivitır", "tıvıtır", "aç"));
         concepts.put(OPEN_CAMERA, Arrays.asList("kamera","kamera","selfie","resim","fotoğraf","öz çekim", "aç", "çek"));
         concepts.put(ABOUT, Arrays.asList("hakkında","kimsin","üretti","yaptı","seni","yarattı", "geliştirdi", "iletişim"));
+        concepts.put(READ_WIKIPEDIA, Arrays.asList("wiki","wikipedia","kimdir","nedir"));
     }
 
     public Integer analyze(String result) {

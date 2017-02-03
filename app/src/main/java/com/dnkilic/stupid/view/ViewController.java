@@ -64,6 +64,7 @@ public class ViewController implements ProposalTouchListener{
         mProposalList.add(new Proposal("masal"));
         mProposalList.add(new Proposal("tekerleme"));
         mProposalList.add(new Proposal("yalnızım"));
+        mProposalList.add(new Proposal("michael jackson kimdir"));
     }
 
     public void initialize() {
@@ -90,14 +91,14 @@ public class ViewController implements ProposalTouchListener{
             @Override
             public void onTextChanged(final CharSequence s, int start, int before, int count) {
                 mIsTextInput = true;
-                etMessage.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.input_text, 0);
+                etMessage.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.ic_input_text, 0);
             }
             @Override
             public void afterTextChanged(final Editable s) {
                 if(s.length() == 0)
                 {
                     mIsTextInput = false;
-                    etMessage.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.input_microphone, 0);
+                    etMessage.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.ic_input_mic, 0);
                 }
             }
         });

@@ -6,10 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-/**
- * Created by dnkilic on 11/06/16.
- */
 public class DatabaseManager extends SQLiteOpenHelper {
+
+    //TODO use firebase real time database
 
     private static final String DB_NAME = "sementha.db";
 

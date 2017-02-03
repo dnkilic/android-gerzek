@@ -1,7 +1,5 @@
 package com.dnkilic.stupid.command;
 
-import com.dnkilic.stupid.command.WikipediaReader;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -44,7 +42,7 @@ public class WikiSearchManager {
                 }
                 catch (Exception e)
                 {
-                    mReadResultListener.onWikipediaResult("");
+                    mReadResultListener.onWikipediaResult("Bu bilgiyi wikipedia'da bulamadım.");
                     e.printStackTrace();
                 }
             }

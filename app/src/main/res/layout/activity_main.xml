@@ -75,7 +75,7 @@
                 android:textColorHint="#c4c0bd"
                 android:textColor="@android:color/black"
                 android:background="@null"
-                android:drawableRight="@drawable/input_microphone"
+                android:drawableRight="@mipmap/ic_input_mic"
                 android:layout_marginBottom="2dp" />
         </LinearLayout>
     </LinearLayout>

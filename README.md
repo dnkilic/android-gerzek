@@ -19,7 +19,7 @@ Screenshots
 --------
 
 ![](screenshots/oie_transparent (17).png)  ![](screenshots/oie_transparent (18).png)  ![](screenshots/oie_transparent (19).png)  ![](screenshots/oie_transparent (20).png)  
-![](screenshots/oie_transparent (21).png)  ![](screenshots/oie_transparent (22).png)  ![](screenshots/oie_transparent (23).png)  ![](screenshots/oie_transparent (24).png)
+![](screenshots/oie_transparent (21).png)  ![](screenshots/oie_transparent (22).png)  ![](screenshots/oie_transparent (24).png)  ![](screenshots/oie_transparent (23).png)
 
 Developers
 --------

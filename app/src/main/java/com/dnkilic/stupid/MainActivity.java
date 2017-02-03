@@ -209,25 +209,22 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
     @Override
     public void onResults(Bundle results) {
         ArrayList<String> recognitionResults = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-        final StringBuilder sbDictationResult = new StringBuilder();
 
-        if(recognitionResults != null)
+        if(recognitionResults != null && !recognitionResults.isEmpty())
         {
-            for (String result : recognitionResults)
-            {
-                sbDictationResult.append(result);
-                sbDictationResult.append("\t");
-            }
+            final String sbDictationResult;
+
+            sbDictationResult = recognitionResults.get(0);
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    viewController.addDialogItem(new Dialog(sbDictationResult, DialogType.TYPE_DIALOG_SENT));
+                }
+            });
+
+            analyzeAndRunText(sbDictationResult);
         }
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                viewController.addDialogItem(new Dialog(sbDictationResult.toString(), DialogType.TYPE_DIALOG_SENT));
-            }
-        });
-
-        analyzeAndRunText(sbDictationResult.toString());
     }
 
     @Override

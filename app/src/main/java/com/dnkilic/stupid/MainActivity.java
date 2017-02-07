@@ -28,6 +28,7 @@ import com.dnkilic.stupid.view.DialogType;
 import com.dnkilic.stupid.view.Proposal;
 import com.dnkilic.stupid.view.ViewController;
 import com.dnkilic.stupid.view.ViewInteractListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
     private Speaker speakerManager;
     private ViewController viewController;
     private CommandRunner commandRunner;
+    private FirebaseAnalytics mFirebaseAnalytics;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,10 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
         speakerManager = new Speaker(this);
         recognitionManager = new RecognitionManager(this);
         commandRunner = new CommandRunner(this);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        Bundle bundle = new Bundle();
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, bundle);
     }
 
     @Override
@@ -78,6 +85,10 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
     @AskPermission(RECORD_AUDIO)
     @Override
     public void startRecognition() {
+
+        Bundle bundle = new Bundle();
+        mFirebaseAnalytics.logEvent("SPEECH_RECOGNITION", bundle);
+
         recognitionManager.start();
         runOnUiThread(new Runnable() {
             @Override
@@ -89,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
 
     @Override
     public void sendTextMessage(final String message) {
+
+        Bundle bundle = new Bundle();
+        mFirebaseAnalytics.logEvent("TEXT_INPUT", bundle);
 
         runOnUiThread(new Runnable() {
             @Override
@@ -104,6 +118,9 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
     @Override
     public void onProposalSelected(final Proposal proposal) {
 
+        Bundle bundle = new Bundle();
+        mFirebaseAnalytics.logEvent("PROPOSAL_SELECT", bundle);
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -116,7 +133,12 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
     }
 
     private void analyzeAndRunText(String text) {
-        commandRunner.run(text);
+
+        Bundle b = new Bundle();
+        b.putString("Query", text);
+        mFirebaseAnalytics.logEvent("ANALYZE", b);
+
+        commandRunner.run(text.toLowerCase());
     }
 
     @Override
@@ -261,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                viewController.addDialogItem(new Dialog("Ses sentezi yapğılırken bir hata oluştu", DialogType.TYPE_MESSAGE_ERROR));
+                viewController.addDialogItem(new Dialog("Ses sentezi yapılırken bir hata oluştu", DialogType.TYPE_MESSAGE_ERROR));
                 viewController.enableActions();
                 viewController.clearProposals();
                 viewController.addRandomProposals();

@@ -58,7 +58,7 @@ public class CommandAnalyzer {
         concepts.put(MORNING, Arrays.asList("günaydın", "hayırlı sabahlar", "sabah şerif", "iyi uyudun mu", "iyi sabahlar"));
         concepts.put(MARRY, Collections.singletonList("evlen"));
         concepts.put(BEAUTIFUL, Collections.singletonList("güzel"));
-        concepts.put(LOVE, Arrays.asList("seviyorum", "sevgi", "aşk", "hoşlan", "aşık"));
+        concepts.put(LOVE, Arrays.asList("seviyorum", "sevgi", "aşk", "hoşlan", "aşık", "seni"));
         concepts.put(TRANSPORT, Collections.singletonList("akbil"));
         concepts.put(OPEN_BLUETOOTH, Arrays.asList("bluetooth", "aç"));
         concepts.put(CLOSE_BLUETOOTH, Arrays.asList("bluetooth", "kapa"));

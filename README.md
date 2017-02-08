@@ -1,7 +1,7 @@
 # Gerzek
 This application is created by a group of student who finished Learn Android in 32 Days course.
 
-<a href="null" alt="Download from Google Play">
+<a href="https://play.google.com/store/apps/details?id=com.dnkilic.stupid" alt="Download from Google Play">
   <img src="http://www.android.com/images/brand/android_app_on_play_large.png">
 </a>
 

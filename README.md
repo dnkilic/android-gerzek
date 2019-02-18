@@ -1,3 +1,6 @@
+# DEPRECATED
+This project developed by students, outdated and currently not supported.
+
 # Gerzek
 This application is created by a group of student who finished Learn Android in 32 Days course.
 
